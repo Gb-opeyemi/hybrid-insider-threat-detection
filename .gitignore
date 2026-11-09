@@ -1,0 +1,25 @@
+# Keep research datasets, archives and secrets out of Git
+data/raw/
+data/ground_truth/
+data/processed/
+data/exports/
+*.tar.gz
+*.zip
+*.evtx
+*.pcap
+*.sha256
+*.jsonl
+*.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pkl
+*.joblib
+*.pt
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.pytest_cache/
+.DS_Store
