@@ -1,6 +1,6 @@
 # Hybrid Insider-Threat Detection with Wazuh and Machine Learning
 
-This repository contains an MSc Cybersecurity project on insider-threat detection
+This repository contains my MSc Cybersecurity project on insider-threat detection
 in a simulated university environment. The study examines how machine learning
 and Wazuh rules respond to benign and malicious activity carried out by synthetic
 university accounts.
