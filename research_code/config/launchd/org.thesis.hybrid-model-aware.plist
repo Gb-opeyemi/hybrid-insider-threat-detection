@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Disabled</key>
+	<true/>
+	<key>Label</key>
+	<string>org.thesis.hybrid-model-aware</string>
+	<key>ProcessType</key>
+	<string>Background</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/ABSOLUTE/PATH/TO/VERIFIED/PYTHON</string>
+		<string>-B</string>
+		<string>-m</string>
+		<string>src.model_aware_service</string>
+		<string>--config</string>
+		<string>/ABSOLUTE/PATH/TO/PRIVATE/model_aware.json</string>
+		<string>once</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StandardErrorPath</key>
+	<string>/ABSOLUTE/PATH/TO/USER_LIBRARY_LOGS/ThesisHybrid/model-aware.stderr.log</string>
+	<key>StandardOutPath</key>
+	<string>/ABSOLUTE/PATH/TO/USER_LIBRARY_LOGS/ThesisHybrid/model-aware.stdout.log</string>
+	<key>StartInterval</key>
+	<integer>30</integer>
+	<key>Umask</key>
+	<integer>63</integer>
+	<key>WorkingDirectory</key>
+	<string>/ABSOLUTE/PATH/TO/REPOSITORY</string>
+</dict>
+</plist>

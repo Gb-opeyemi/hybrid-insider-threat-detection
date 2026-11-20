@@ -1,0 +1,29 @@
+<!-- New separate file: /var/ossec/etc/rules/thesis_hybrid_priority_rules.xml.
+     IDs 110510-110512 are unused in the inspected local rules, and the user
+     confirmed no matches in the installed manager rules on 2026-11-14.
+     Recheck if the installed rule inventory changes. Existing rules
+     and the monitored JSON log remain unchanged. -->
+<group name="thesis_hybrid,controlled_replay,">
+  <rule id="110510" level="0">
+    <decoded_as>json</decoded_as>
+    <location type="pcre2">^/var/log/thesis-ml/predictions\.jsonl$</location>
+    <field name="event_type" type="pcre2">^thesis_hybrid_priority$</field>
+    <field name="mode" type="pcre2">^completed_session_hybrid$</field>
+    <field name="schema_version" type="pcre2">^1$</field>
+    <field name="historical_replay" type="pcre2">^true$</field>
+    <field name="wazuh_evidence_verified" type="pcre2">^true$</field>
+    <field name="wazuh_detected" type="pcre2">^1$</field>
+    <field name="fusion_policy_version" type="pcre2">^rf_wazuh_priority_v1_exploratory$</field>
+    <description>Verified completed-session historical hybrid priority record.</description>
+  </rule>
+  <rule id="110511" level="10">
+    <if_sid>110510</if_sid>
+    <field name="hybrid_priority" type="pcre2">^High Priority$</field>
+    <description>HISTORICAL HYBRID DEMONSTRATION: High Priority; user=$(username), RF=$(rf_classification), probability=$(rf_malicious_probability), Wazuh=$(wazuh_detected), unresolved=$(unresolved_alert_count), telemetry=$(telemetry_completeness_status), synthetic=$(synthetic). Investigation required. Not a live incident.</description>
+  </rule>
+  <rule id="110512" level="5">
+    <if_sid>110510</if_sid>
+    <field name="hybrid_priority" type="pcre2">^Needs Review$</field>
+    <description>HISTORICAL HYBRID DEMONSTRATION: Needs Review; user=$(username), RF=$(rf_classification), probability=$(rf_malicious_probability), Wazuh=$(wazuh_detected), unresolved=$(unresolved_alert_count), telemetry=$(telemetry_completeness_status), synthetic=$(synthetic). Investigation required. Not a live incident.</description>
+  </rule>
+</group>

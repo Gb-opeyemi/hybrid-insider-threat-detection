@@ -1,0 +1,5 @@
+<!-- Proposed addition inside existing ossec_config; do not replace the RF block. -->
+<localfile>
+  <log_format>json</log_format>
+  <location>/var/log/thesis-ml/tabpfn_predictions.jsonl</location>
+</localfile>

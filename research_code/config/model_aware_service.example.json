@@ -1,0 +1,9 @@
+{
+  "rf_config": "data/experiments/operational_service/private/service_wazuh.json",
+  "connection": "data/experiments/operational_service/private/connection.json",
+  "state_dir": "data/experiments/operational_service/model_aware/router_01",
+  "tabpfn_state_dir": "data/experiments/tabpfn_prototype/model_aware/worker_01",
+  "dry_run": true,
+  "enable_publication": false,
+  "legacy_label": "org.thesis.hybrid-sessions"
+}

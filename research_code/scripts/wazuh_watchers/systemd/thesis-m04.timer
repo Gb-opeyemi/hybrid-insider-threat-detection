@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Thesis M04 Detector Every 30 Seconds
+
+[Timer]
+OnActiveSec=30s
+OnUnitInactiveSec=30s
+AccuracySec=1s
+Unit=thesis-m04.service
+
+[Install]
+WantedBy=timers.target

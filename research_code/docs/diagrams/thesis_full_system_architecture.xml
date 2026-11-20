@@ -1,0 +1,678 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device" version="24.7.17">
+  <diagram id="full-system" name="Full System Overview">
+    <mxGraphModel dx="1800" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2160" pageHeight="1790" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="o-title" value="Hybrid insider-threat detection: full system architecture" style="text;whiteSpace=wrap;html=0;fontSize=26;fontColor=#334155;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="15" width="2000" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="o-subtitle" value="Implemented source architecture | Blue: Windows simulation | Orange: Wazuh | Green: offline research | Purple: operational hybrid | Dashed arrows: artifact/telemetry hand-off" style="text;whiteSpace=wrap;html=0;fontSize=14;fontColor=#334155;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="62" width="2000" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o-server" value="Windows Server 2019 | synthetic university laboratory" style="swimlane;startSize=38;horizontal=1;rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#64748b;fontSize=17;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="500" height="580" as="geometry" />
+        </mxCell>
+        <mxCell id="o-ad" value="Active Directory accounts / groups&#10;Role-based SMB shares + audited files" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-server">
+          <mxGeometry x="20" y="55" width="460" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="o-schedule" value="14-day CSV schedule&#10;DatasetScheduler + TaskRunner&#10;1,200 planned sessions" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-server">
+          <mxGeometry x="20" y="155" width="220" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="o-activities" value="Normal N01–N07&#10;Malicious M01–M04&#10;M05 queue dispatcher" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-server">
+          <mxGeometry x="260" y="155" width="220" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="o-ledger" value="Execution ledger&#10;Handler / M05 result records" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f5f5f5;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-server">
+          <mxGeometry x="20" y="285" width="220" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="o-logs" value="Windows Security + Sysmon&#10;Authentication, file, process&#10;and network telemetry" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-server">
+          <mxGeometry x="260" y="285" width="220" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="o-newrunner" value="New controlled-session runner&#10;Selected SMB account&#10;Actual start/end + session UUID" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-server">
+          <mxGeometry x="20" y="405" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="o-agent" value="Wazuh agent collection&#10;Event channels + lifecycle JSON&#10;Started / terminal metadata" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-server">
+          <mxGeometry x="260" y="425" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="o-client" value="Windows 11 client" style="swimlane;startSize=38;horizontal=1;rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#64748b;fontSize=17;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="580" y="120" width="290" height="580" as="geometry" />
+        </mxCell>
+        <mxCell id="o-m05" value="M05 worker&#10;SMB queue + source reads&#10;SFTP transfer + result JSON" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-client">
+          <mxGeometry x="20" y="155" width="250" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="o-clientlogs" value="Client Security / Sysmon&#10;Wazuh agent telemetry collection&#10;Includes SFTP process evidence" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-client">
+          <mxGeometry x="20" y="345" width="250" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-ubuntu" value="Ubuntu Wazuh VM | monitoring and publication" style="swimlane;startSize=38;horizontal=1;rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;swimlaneFillColor=#ffffff;strokeColor=#64748b;fontSize=17;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="910" y="120" width="1190" height="580" as="geometry" />
+        </mxCell>
+        <mxCell id="o-manager" value="Wazuh Manager&#10;Decode enrolled-agent events" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="20" y="65" width="240" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="o-archives" value="All-event JSON archives&#10;Security / Sysmon / lifecycle" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="310" y="65" width="240" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="o-filebeat" value="Filebeat&#10;Archive + alert indexing" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="600" y="65" width="240" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="o-index" value="Wazuh Indexer&#10;wazuh-archives-*&#10;wazuh-alerts-*" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;shape=cylinder3;size=12;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="890" y="65" width="280" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="o-rules" value="Custom M01–M05 rules&#10;Direct events + summary JSON" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="20" y="240" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="o-watch" value="M03 / M04 watchers&#10;Indexer 4663 aggregations&#10;systemd; fixed OR rolling" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="310" y="240" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-alerts" value="Rule alert JSON&#10;Standalone + hybrid alerts" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="600" y="240" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="o-dashboard" value="Wazuh Dashboard / Discover&#10;Historical controlled-session&#10;hybrid priority alerts" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="890" y="240" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="o-receiver" value="Restricted SSH receiver&#10;Schema + ownership checks&#10;Shared lock / deduplication" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="20" y="425" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-publog" value="Dedicated prediction JSONL&#10;Separate RF / TabPFN logs&#10;Durable write + ACK" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="310" y="425" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-displayrules" value="JSON decoder + display rules&#10;RF: 110511 / 110512&#10;TabPFN: 110521 / 110522" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="600" y="425" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-sftp" value="SFTP receiver&#10;Controlled M05 destination&#10;Separate from alert publishing" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-ubuntu">
+          <mxGeometry x="890" y="425" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-mac" value="Mac host | Python research and operational controller" style="swimlane;startSize=38;horizontal=1;rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;swimlaneFillColor=#ffffff;strokeColor=#64748b;fontSize=17;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="820" width="2060" height="775" as="geometry" />
+        </mxCell>
+        <mxCell id="o-offline" value="OFFLINE: dataset creation, training and evaluation" style="swimlane;startSize=38;horizontal=1;rounded=1;whiteSpace=wrap;html=0;fillColor=#d5e8d4;swimlaneFillColor=#ffffff;strokeColor=#64748b;fontSize=17;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="o-mac">
+          <mxGeometry x="20" y="55" width="930" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="o-inputs" value="Immutable local research inputs&#10;Schedule, ledger, M05 results&#10;Wazuh archives / alerts" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#d5e8d4;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-offline">
+          <mxGeometry x="20" y="60" width="270" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="o-ground" value="Ground-truth reconciliation&#10;src/ground_truth.py&#10;All 1,200 master sessions retained" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#d5e8d4;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-offline">
+          <mxGeometry x="20" y="205" width="270" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="o-feature" value="Event validation + attribution&#10;Deduplication; causal identities&#10;Final 23 behavioural predictors" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#d5e8d4;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-offline">
+          <mxGeometry x="340" y="205" width="270" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="o-split" value="Frozen chronological split&#10;Train D1–8: 659&#10;Validation D9–10: 231&#10;Test D11–14: 286" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#d5e8d4;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-offline">
+          <mxGeometry x="20" y="375" width="270" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="o-train" value="Notebook 06/07 preprocessing&#10;Train-only medians; no scaling&#10;RF + TabPFN baseline training" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#d5e8d4;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-offline">
+          <mxGeometry x="340" y="375" width="270" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="o-frozen" value="Frozen fitted models&#10;RF .joblib / TabPFN .tabpfn_fit&#10;Imputer + verification bundle" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#d5e8d4;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-offline">
+          <mxGeometry x="650" y="375" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="o-eval" value="Notebooks 08/09: standalone comparison + exploratory hybrid analysis&#10;Saved predictions, confusion matrices, metrics and figures&#10;Accuracy / precision / recall / F1 / FPR; ROC / PR AUC where applicable&#10;results/ | Separate from the operational integration demonstration" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#d5e8d4;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-offline">
+          <mxGeometry x="340" y="525" width="570" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="o-offnote" value="No labels, scenario IDs, roles,&#10;rule outcomes or session IDs&#10;as predictive inputs.&#10;Legacy scaling factory is not&#10;the final 23-feature recipe." style="text;whiteSpace=wrap;html=0;fontSize=13;fontColor=#334155;align=left;verticalAlign=middle;" vertex="1" parent="o-offline">
+          <mxGeometry x="20" y="525" width="270" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oper" value="OPERATIONAL: selected model, completed sessions only" style="swimlane;startSize=38;horizontal=1;rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;swimlaneFillColor=#ffffff;strokeColor=#64748b;fontSize=17;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="o-mac">
+          <mxGeometry x="980" y="55" width="1060" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="o-service" value="launchd: 30-second polls&#10;Verified completion feed&#10;SQLite jobs; wait end + 300 s" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-oper">
+          <mxGeometry x="20" y="65" width="310" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-extract" value="Bounded archive retrieval&#10;Account / host / ProcessGuid&#10;Deduplicate → same 23 features" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-oper">
+          <mxGeometry x="375" y="65" width="310" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-model" value="THESIS_HYBRID_MODEL&#10;RF default OR TabPFN&#10;Pinned per job; frozen imputation" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-oper">
+          <mxGeometry x="730" y="65" width="310" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-evidence" value="Actual M01–M05 alert evidence&#10;Exact event / account / host&#10;Original availability cutoff" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-oper">
+          <mxGeometry x="20" y="255" width="310" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-fusion" value="Existing hybrid priority policy&#10;Selected ML decision +&#10;independently verified evidence" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-oper">
+          <mxGeometry x="375" y="255" width="310" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-publish" value="Prepare + reverify + send&#10;Explicit publication enablement&#10;Model-specific provenance" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-oper">
+          <mxGeometry x="730" y="255" width="310" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o-state" value="Persistent state + audit records&#10;Model-specific artifacts / ACKs&#10;Bounded retries; no backfill" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;shape=cylinder3;size=12;" vertex="1" parent="o-oper">
+          <mxGeometry x="20" y="455" width="310" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="o-timing" value="Operational timing sidecars&#10;Retrieval → inference → publish&#10;UTC + monotonic durations&#10;JSON spans / reports; CSV export" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-oper">
+          <mxGeometry x="375" y="455" width="310" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="o-hold" value="Unverified / missing evidence&#10;Evidence Unavailable&#10;Investigation; no publication&#10;Completeness warnings retained" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f8cecc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="o-oper">
+          <mxGeometry x="730" y="455" width="310" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="o-footer" value="Source basis: simulation/original_14_day; scripts/wazuh_watchers; src/ground_truth.py, features.py, model_aware_service.py, model_aware_orchestrator.py; notebooks 06–09; scripts/integration; config.&#10;Lab provisioning / historical deployment timeline are not fully supplied. Watcher summaries lack full session identity; installed transports and services were not queried to create this diagram.&#10;Offline holdout is retrospective (Day 12 informed rule development). Operational demonstration is not a statistically evaluated independent hybrid test." style="text;whiteSpace=wrap;html=0;fontSize=14;fontColor=#334155;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1620" width="2060" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="o1" value="Account / share permissions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-ad" target="o-activities">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o2" value="Dispatch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-schedule" target="o-activities">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o3" value="Outcome evidence" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.3;exitY=1;entryX=1;entryY=0.5;" edge="1" parent="1" source="o-activities" target="o-ledger">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="380" />
+              <mxPoint x="300" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o4" value="Audited activity" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-activities" target="o-logs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o5" value="Event channels" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-logs" target="o-agent">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o6" value="Lifecycle JSONL + activity" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-newrunner" target="o-agent">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o7" value="SMB queue / files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-activities" target="o-m05">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o8" value="Client events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-m05" target="o-clientlogs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o9" value="Enrolled-agent channel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-agent" target="o-manager">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="600" />
+              <mxPoint x="890" y="600" />
+              <mxPoint x="890" y="227" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o10" value="Collected client events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.2;entryX=0;entryY=0.8;" edge="1" parent="1" source="o-clientlogs" target="o-manager">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890" y="485" />
+              <mxPoint x="890" y="253" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o11" value="Archive" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-manager" target="o-archives">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o12" value="JSON files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-archives" target="o-filebeat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o13" value="Index" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-filebeat" target="o-index">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o14" value="Analyse" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-manager" target="o-rules">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o15" value="Rule matches" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=0;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-rules" target="o-alerts">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1050" y="315" />
+              <mxPoint x="1630" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o16" value="Read-only search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.3;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-index" target="o-watch">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1884" y="300" />
+              <mxPoint x="1340" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o17" value="Summary JSON localfile" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="o-watch" target="o-rules">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o18" value="Alert files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="o-alerts" target="o-filebeat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o19" value="Search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-index" target="o-dashboard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o20" value="Append once" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-receiver" target="o-publog">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o21" value="Manager localfile" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-publog" target="o-displayrules">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o22" value="Hybrid alert" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="o-displayrules" target="o-alerts">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o23" value="SFTP over SSH" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="o-m05" target="o-sftp">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880" y="327" />
+              <mxPoint x="880" y="740" />
+              <mxPoint x="1940" y="740" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o24" value="Local evidence copies" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0;exitY=0.5;entryX=0;entryY=0.5;dashed=1;" edge="1" parent="1" source="o-ledger" target="o-inputs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="442" />
+              <mxPoint x="20" y="980" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o25" value="Historical JSON / JSON.GZ acquisition" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0;exitY=0.5;entryX=0.5;entryY=0;dashed=1;" edge="1" parent="1" source="o-archives" target="o-inputs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="227" />
+              <mxPoint x="1200" y="780" />
+              <mxPoint x="215" y="780" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o26" value="Validate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-inputs" target="o-ground">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o27" value="Actual windows / ground truth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-ground" target="o-feature">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o28" value="Eligibility + chronological day" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-feature" target="o-split">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="535" y="1210" />
+              <mxPoint x="215" y="1210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o29" value="Train only" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-split" target="o-train">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o30" value="Save" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-train" target="o-frozen">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o31" value="Saved model predictions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-train" target="o-eval">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o32" value="Verified frozen artifacts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0.5;entryY=0;dashed=1;" edge="1" parent="1" source="o-frozen" target="o-model">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1000" y="1305" />
+              <mxPoint x="1000" y="850" />
+              <mxPoint x="1905" y="850" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o33" value="After cutoff" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-service" target="o-extract">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o34" value="Ordered feature vector" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-extract" target="o-model">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o35" value="Classification + probability" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-model" target="o-fusion">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1905" y="1085" />
+              <mxPoint x="1550" y="1085" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o36" value="Verified decision / unknown" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-evidence" target="o-fusion">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o37" value="Eligible verified result" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-fusion" target="o-publish">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o38" value="Unavailable / invalid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-fusion" target="o-hold">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1550" y="1275" />
+              <mxPoint x="1905" y="1275" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o39" value="Jobs / stages" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-service" target="o-state">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1010" y="990" />
+              <mxPoint x="1010" y="1385" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o40" value="Measured stage spans" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;dashed=1;" edge="1" parent="1" source="o-fusion" target="o-timing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o41" value="Verified HTTPS / SSH tunnel: lifecycle" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.3;entryX=0.5;entryY=0;" edge="1" parent="1" source="o-index" target="o-service">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2120" y="210" />
+              <mxPoint x="2120" y="805" />
+              <mxPoint x="1195" y="805" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o42" value="Bounded archive search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.6;entryX=0.5;entryY=0;dashed=1;" edge="1" parent="1" source="o-index" target="o-extract">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2130" y="235" />
+              <mxPoint x="2130" y="790" />
+              <mxPoint x="1550" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o43" value="Bounded alert search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.9;entryX=0;entryY=0.5;dashed=1;" edge="1" parent="1" source="o-index" target="o-evidence">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2140" y="260" />
+              <mxPoint x="2140" y="1580" />
+              <mxPoint x="990" y="1580" />
+              <mxPoint x="990" y="1180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o44" value="Restricted SSH: claim + verified JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="o-publish" target="o-receiver">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2110" y="1180" />
+              <mxPoint x="2110" y="765" />
+              <mxPoint x="1050" y="765" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o45" value="Worker result JSON via SMB" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0;exitY=0.7;entryX=0;entryY=0.5;" edge="1" parent="1" source="o-m05" target="o-ledger">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="350" />
+              <mxPoint x="560" y="720" />
+              <mxPoint x="30" y="720" />
+              <mxPoint x="30" y="442" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="operational-detail" name="Detailed Operational Detection Flow">
+    <mxGraphModel dx="1800" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2160" pageHeight="1950" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="d-title" value="Operational hybrid detection: one completed session, one pinned model" style="text;whiteSpace=wrap;html=0;fontSize=26;fontColor=#334155;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="15" width="2060" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="d-sub" value="Implemented model-aware path | No online model training | Event-time window [S − 2 s, E + 2 s] | Availability cutoff C = E + 300 s" style="text;whiteSpace=wrap;html=0;fontSize=15;fontColor=#334155;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="65" width="2060" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="d-win" value="Windows Server 2019" style="swimlane;startSize=38;horizontal=1;rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#64748b;fontSize=17;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="390" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="d-run" value="Controlled PowerShell activity&#10;Verified selected SMB identity&#10;Session UUID + actual S / E" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-win">
+          <mxGeometry x="20" y="65" width="350" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="d-life" value="Wazuh agent&#10;Security / Sysmon events +&#10;Started / terminal lifecycle JSON" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-win">
+          <mxGeometry x="20" y="215" width="350" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="d-ubread" value="Ubuntu Wazuh VM | evidence sources" style="swimlane;startSize=38;horizontal=1;rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;swimlaneFillColor=#ffffff;strokeColor=#64748b;fontSize=17;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="470" y="120" width="420" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="d-ingest" value="Manager → Filebeat → Indexer&#10;Archives include lifecycle records&#10;Rules generate actual alert records" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-ubread">
+          <mxGeometry x="20" y="65" width="380" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="d-index" value="Authenticated read-only indexer&#10;Archives + custom-rule alerts&#10;Mappings / counts / full pagination" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;shape=cylinder3;size=12;" vertex="1" parent="d-ubread">
+          <mxGeometry x="20" y="215" width="380" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="d-policy" value="Evidence and priority policy&#10;&#10;ML=1 + verified Wazuh=1 → High Priority&#10;ML=0 + verified Wazuh=1 → Needs Review&#10;No attributable positive → Evidence Unavailable&#10;Query failure / invalid evidence → investigation&#10;&#10;The generic fusion function also supports verified 0/0 and 1/0. The operational matcher does not currently prove a negative from absent alerts.&#10;&#10;M03/M04 summaries without a complete identity/host/window contract remain unresolved, even when separately verified positive alerts exist." style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f5f5f5;strokeColor=#64748b;fontSize=16;fontColor=#172b4d;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="515" width="850" height="365" as="geometry" />
+        </mxCell>
+        <mxCell id="d-mac" value="Mac host | model-aware service and persistent processing" style="swimlane;startSize=38;horizontal=1;rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;swimlaneFillColor=#ffffff;strokeColor=#64748b;fontSize=17;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="940" y="120" width="1160" height="1510" as="geometry" />
+        </mxCell>
+        <mxCell id="d-poll" value="launchd every 30 seconds&#10;Private settings + login Keychain&#10;TLS-verified HTTPS over SSH tunnel" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="20" y="65" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-discover" value="Verify lifecycle pair&#10;Agent / location / feed / host&#10;Account / UUID / status / timestamps" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="410" y="65" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-pin" value="Admit post-arming sessions only&#10;Pin .env model + code/model hashes&#10;RF default; no midway model switch" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="800" y="65" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-gate" value="Wait until UTC now ≥ E + 300 s&#10;Reject failed / unverified completion&#10;Block known overlap / bad host" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="800" y="240" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-fetch" value="Retrieve actual Windows events&#10;Bounded identity context + window&#10;Availability ≤ original cutoff C" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="410" y="240" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-feat" value="Deduplicate / exclude orchestration&#10;Causal account + ProcessGuid links&#10;Compute exact trained 23 features" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="20" y="240" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-impute" value="Frozen training-median imputer&#10;Exact feature order; no scaling&#10;Missing telemetry stays flagged" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="20" y="415" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-select" value="Pinned&#10;model?" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;rhombus;" vertex="1" parent="d-mac">
+          <mxGeometry x="430" y="425" width="135" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d-rf" value="RF: load trusted .joblib&#10;Verify model / schema / dependencies&#10;predict + predict_proba" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="650" y="395" width="490" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d-tab" value="TabPFN: load fitted .tabpfn_fit&#10;Verified local checkpoint; no downloads&#10;Same features / medians; CPU restoration" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="650" y="525" width="490" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d-pred" value="Model-specific saved prediction&#10;Classification + malicious probability&#10;Hashes / provenance / validation" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="800" y="700" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-evidence" value="Retrieve actual M01–M05 alerts&#10;Match exact archived event, account,&#10;host, clocks and availability ≤ C" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="410" y="700" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-fuse" value="fuse_hybrid_priority()&#10;Selected ML + verified Wazuh&#10;Policy version + unresolved evidence" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="20" y="700" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-prepare" value="Prepare and reverify&#10;Source/session/model/rule hashes&#10;Identity + evidence + fusion gates" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="20" y="900" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-hold" value="Investigation / held dry-run&#10;Unknown evidence is not negative&#10;No publication if unverified&#10;Bounded transient retries only" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f8cecc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="410" y="900" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-send" value="Explicit publication enabled?&#10;Claim + prepared payload over SSH&#10;No fallback or duplicate model send" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="800" y="900" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-state" value="Durable jobs, model routes and artifacts&#10;SQLite state + events; source hashes; ACK receipts&#10;Restart recovery; separate RF / TabPFN execution records" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;shape=cylinder3;size=12;" vertex="1" parent="d-mac">
+          <mxGeometry x="20" y="1110" width="535" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="d-time" value="Operational timing, not detection accuracy&#10;Monotonic spans + UTC timestamps per attempt&#10;Primary / verification work; JSON reports and CSV export" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e1d5e7;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-mac">
+          <mxGeometry x="605" y="1110" width="535" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="d-note" value="Current poll/retry time never replaces the saved cutoff. Labels, ScenarioID, role and execution outcomes are not model inputs.&#10;Telemetry warnings remain in eligible published payloads. Missing timing measurements remain unavailable rather than fabricated.&#10;The selected model is pinned when a new job is admitted. Switching back to RF preserves existing jobs and publication history." style="text;whiteSpace=wrap;html=0;fontSize=15;fontColor=#334155;align=left;verticalAlign=middle;" vertex="1" parent="d-mac">
+          <mxGeometry x="20" y="1300" width="1120" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="d-ubpub" value="Ubuntu Wazuh VM | guarded publication return path" style="swimlane;startSize=38;horizontal=1;rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;swimlaneFillColor=#ffffff;strokeColor=#64748b;fontSize=17;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="980" width="850" height="650" as="geometry" />
+        </mxCell>
+        <mxCell id="d-recv" value="Forced-command SSH receiver&#10;Strict schema + selected-model claim&#10;Validate under shared file lock" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-ubpub">
+          <mxGeometry x="20" y="70" width="360" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-ledger" value="Append-only ownership / prediction ledgers&#10;Conflicting claims rejected&#10;Exact retry → duplicate ACK" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;shape=cylinder3;size=12;" vertex="1" parent="d-ubpub">
+          <mxGeometry x="20" y="250" width="360" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="d-log" value="Dedicated RF / TabPFN JSONL&#10;Append + fsync + publication UTC&#10;Written / duplicate ACK to Mac" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-ubpub">
+          <mxGeometry x="460" y="70" width="370" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d-rule" value="Manager JSON localfile + display rules&#10;RF 110511/110512; TabPFN 110521/110522&#10;Historical controlled-session event types" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-ubpub">
+          <mxGeometry x="460" y="250" width="370" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="d-dash" value="Alert → Filebeat → Indexer → Discover&#10;Check prediction/session ID, priority,&#10;probability, rule IDs and warnings&#10;Receiver ACK alone ≠ indexed visibility" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe6cc;strokeColor=#64748b;fontSize=14;fontColor=#172b4d;spacing=8;" vertex="1" parent="d-ubpub">
+          <mxGeometry x="460" y="450" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="d-sources" value="Source references: scripts/operational/prepare_windows_completion_runner.py + Write-WazuhSessionLifecycle.ps1; src/wazuh_completion_feed.py; src/model_aware_service.py + model_aware_orchestrator.py;&#10;src/controlled_replay/new_session.py + hybrid_session.py; src/tabpfn_prototype/; src/features.py; src/hybrid_priority.py; src/model_aware_publication.py; scripts/integration/guarded_receiver.py; src/operational_timing.py + timing_hooks.py.&#10;Implementation diagram, not an assertion that the selected model, services or publication are currently enabled. No private addresses, identities or credentials are shown." style="text;whiteSpace=wrap;html=0;fontSize=14;fontColor=#334155;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1690" width="2060" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" value="Actual activity + lifecycle" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-run" target="d-life">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="Enrolled-agent transport" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d-life" target="d-ingest">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="450" y="385" />
+              <mxPoint x="450" y="232" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d3" value="Indexed archives / alerts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-ingest" target="d-index">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" value="Poll authenticated feed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d-poll" target="d-discover">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" value="Pinned lifecycle records" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-index" target="d-discover">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="915" y="385" />
+              <mxPoint x="915" y="110" />
+              <mxPoint x="1520" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d6" value="Verified new completion" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d-discover" target="d-pin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d7" value="Pinned job" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-pin" target="d-gate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d8" value="Cutoff passed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="d-gate" target="d-fetch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d9" value="Read-only archive search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;dashed=1;" edge="1" parent="1" source="d-index" target="d-fetch">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="490" />
+              <mxPoint x="1330" y="490" />
+              <mxPoint x="1330" y="335" />
+              <mxPoint x="1520" y="335" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d10" value="Complete validated capture" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="d-fetch" target="d-feat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d11" value="23-feature vector" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-feat" target="d-impute">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d12" value="Numeric inputs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d-impute" target="d-select">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d13" value="random_forest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.25;entryX=0;entryY=0.5;" edge="1" parent="1" source="d-select" target="d-rf">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1540" y="568" />
+              <mxPoint x="1540" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d14" value="tabpfn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" edge="1" parent="1" source="d-select" target="d-tab">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1540" y="612" />
+              <mxPoint x="1540" y="690" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d15" value="RF result" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=1;entryY=0.3;" edge="1" parent="1" source="d-rf" target="d-pred">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2120" y="560" />
+              <mxPoint x="2120" y="850" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d16" value="TabPFN result" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-tab" target="d-pred">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d17" value="Verified inference artifact" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="d-pred" target="d-evidence">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d18" value="Bounded custom-rule alert search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0;exitY=0.5;entryX=0.5;entryY=0;dashed=1;" edge="1" parent="1" source="d-index" target="d-evidence">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="450" y="385" />
+              <mxPoint x="450" y="490" />
+              <mxPoint x="915" y="490" />
+              <mxPoint x="915" y="790" />
+              <mxPoint x="1520" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d19" value="Verified positive or unknown" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="d-evidence" target="d-fuse">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d20" value="Eligible verified positive" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-fuse" target="d-prepare">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d21" value="Unavailable / invalid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-fuse" target="d-hold">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1320" y="940" />
+              <mxPoint x="1520" y="940" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d22" value="All gates + explicit enablement" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="d-prepare" target="d-send">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1130" y="1170" />
+              <mxPoint x="1910" y="1170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d23" value="Dry-run / blocked" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d-prepare" target="d-hold">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d24" value="Restricted SSH; claim then payload" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d-send" target="d-recv">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2140" y="1070" />
+              <mxPoint x="2140" y="1655" />
+              <mxPoint x="20" y="1655" />
+              <mxPoint x="20" y="1100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d25" value="Lock / ownership / dedup checks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-recv" target="d-ledger">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d26" value="Validated append" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d-ledger" target="d-log">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="1285" />
+              <mxPoint x="460" y="1100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d27" value="Manager reads JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-log" target="d-rule">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d28" value="Indexed display alert" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="d-rule" target="d-dash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d29" value="Verified written / duplicate ACK" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;" edge="1" parent="1" source="d-log" target="d-state">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="920" y="1100" />
+              <mxPoint x="920" y="1288" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d30" value="Persist route / stages" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;" edge="1" parent="1" source="d-pin" target="d-state">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2130" y="235" />
+              <mxPoint x="2130" y="1385" />
+              <mxPoint x="930" y="1385" />
+              <mxPoint x="930" y="1288" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d31" value="Observed operation spans" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#475569;exitX=1;exitY=1;entryX=1;entryY=0.5;dashed=1;" edge="1" parent="1" source="d-evidence" target="d-time">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1715" y="950" />
+              <mxPoint x="2110" y="950" />
+              <mxPoint x="2110" y="1288" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

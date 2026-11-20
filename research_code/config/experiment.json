@@ -1,0 +1,15 @@
+{
+  "version": "temporal-v2",
+  "start_date": "2026-10-26",
+  "end_date": "2026-11-08",
+  "train_days": [1, 8],
+  "validation_days": [9, 10],
+  "test_days": [11, 14],
+  "boundary_rationale": "Frozen before re-extraction or model fitting, from day-level support: M04 has 9 train, 7 validation, 4 test scheduled sessions. Retains the longest initial training block with two validation days and test M04 support.",
+  "prediction_cutoff": "ObservationEndUTC",
+  "padding_seconds": 2,
+  "clock_policy": "Exclude prior nine Day 2 clock warnings: documented clock steps do not establish shared UTC receipt/cutoff ordering. Do not infer a timestamp correction.",
+  "overlap_policy": "Preserve prior six overlap exclusions separately; exclude any additional causal ambiguities.",
+  "late_recovery_policy": "Keep in master and extended eligibility; outside the one original-period experiment split.",
+  "test_limitation": "Day 12 was used for M01 rule tuning. This is a retrospective chronological ML holdout, not an untouched independent Wazuh/hybrid evaluation."
+}

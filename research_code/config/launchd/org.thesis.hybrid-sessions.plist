@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>org.thesis.hybrid-sessions</string>
+  <key>Disabled</key><true/>
+  <key>ProgramArguments</key><array>
+    <string>/ABSOLUTE/PATH/TO/VERIFIED/PYTHON</string>
+    <string>-B</string><string>-m</string><string>src.operational_session_service</string>
+    <string>--config</string><string>/ABSOLUTE/PATH/TO/PRIVATE/service.json</string>
+    <string>--connection</string><string>/ABSOLUTE/PATH/TO/PRIVATE/connection.json</string>
+  </array>
+  <key>WorkingDirectory</key><string>/ABSOLUTE/PATH/TO/REPOSITORY</string>
+  <key>StartInterval</key><integer>30</integer>
+  <key>RunAtLoad</key><true/>
+  <key>ProcessType</key><string>Background</string>
+  <key>Umask</key><integer>63</integer>
+  <key>StandardOutPath</key><string>/ABSOLUTE/PATH/TO/USER_LIBRARY_LOGS/ThesisHybrid/service.stdout.log</string>
+  <key>StandardErrorPath</key><string>/ABSOLUTE/PATH/TO/USER_LIBRARY_LOGS/ThesisHybrid/service.stderr.log</string>
+</dict></plist>

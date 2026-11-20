@@ -1,0 +1,11 @@
+<group name="thesis_insider,m03,">
+
+  <rule id="100301" level="10">
+    <decoded_as>json</decoded_as>
+    <field name="m03.scenario">^M03$</field>
+    <field name="m03.unique_files" type="pcre2">^(?:3[1-9]|[4-9][0-9]|[1-9][0-9]{2,})$</field>
+    <description>THESIS M03: Excessive file access. User $(m03.username) accessed $(m03.unique_files) distinct files in 5 minutes.</description>
+    <group>thesis_m03,excessive_file_access,</group>
+  </rule>
+
+</group>

@@ -1,0 +1,9 @@
+[Unit]
+Description=Thesis M03 Distinct File Access Detector
+After=network-online.target wazuh-indexer.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/bin/flock -n /run/thesis-m03.lock /usr/bin/python3 /usr/local/bin/thesis_m03_counter.py

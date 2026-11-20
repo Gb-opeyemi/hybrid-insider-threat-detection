@@ -1,0 +1,9 @@
+[Unit]
+Description=Thesis Insider Threat Detection Engine
+After=network-online.target wazuh-indexer.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/bin/flock -n /run/thesis-detection.lock /usr/local/bin/thesis_detection_runner.sh

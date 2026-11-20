@@ -1,0 +1,10 @@
+{
+  "environment": {
+    "WAZUH_INDEXER_URL": "https://127.0.0.1:9200",
+    "WAZUH_INDEXER_INDEX_PATTERN": "wazuh-archives-*",
+    "WAZUH_ALERT_INDEX_PATTERN": "wazuh-alerts-*",
+    "WAZUH_INDEXER_CA_CERT": "/ABSOLUTE/PATH/TO/TRUSTED/CA.pem",
+    "WAZUH_INDEXER_TLS_PROFILE": "legacy_ca"
+  },
+  "keychain_service": "thesis-operational-wazuh"
+}

@@ -1,0 +1,6 @@
+<!-- Merge inside the existing Windows agent ossec_config. No rule changes. -->
+<localfile>
+  <location>C:\ProgramData\ThesisHybrid\session_lifecycle.jsonl</location>
+  <log_format>json</log_format>
+  <only-future-events>no</only-future-events>
+</localfile>

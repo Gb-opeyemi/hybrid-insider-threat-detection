@@ -1,0 +1,17 @@
+[project]
+name = "hybrid-insider-threat-detection"
+version = "0.1.0"
+description = "Reproduction code for simulated insider-threat experiments and controlled Wazuh hybrid detection"
+requires-python = ">=3.11"
+dependencies = ["numpy==2.4.4", "pandas==3.0.2", "scikit-learn==1.9.0", "joblib==1.5.3"]
+
+[project.optional-dependencies]
+preprocessing = [
+  "numpy==2.4.4",
+  "pandas==3.0.2",
+  "scikit-learn==1.9.0",
+  "joblib==1.5.3"
+]
+notebooks = ["matplotlib==3.11.0", "ipython==9.11.0", "jupyterlab==4.5.7"]
+ml = ["tabpfn==9.2.0", "torch==2.15.0"]
+smote = ["imbalanced-learn==0.14.2"]

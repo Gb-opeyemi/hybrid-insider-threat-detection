@@ -1,0 +1,29 @@
+{
+  "feature_count": 23,
+  "features": [
+    "object_deletion_event_count",
+    "ssh_process_count",
+    "ssh_port22_connection_count",
+    "sftp_process_count",
+    "sftp_network_connection_count",
+    "successful_logon_count",
+    "network_connection_count",
+    "distinct_network_destinations",
+    "file_write_access_count",
+    "file_create_event_count",
+    "process_create_count",
+    "distinct_process_guids",
+    "failed_logon_count",
+    "credential_validation_failure_count",
+    "file_read_access_count",
+    "delete_access_count",
+    "smb_denied_count",
+    "distinct_file_paths",
+    "distinct_smb_paths",
+    "file_access_count",
+    "smb_access_check_count",
+    "unique_action_signatures",
+    "windows_event_count"
+  ],
+  "note": "Names/order only; no learned training statistics or session records included."
+}

@@ -1,0 +1,15 @@
+<group name="thesis_insider,m04,">
+
+  <rule id="100401" level="10">
+    <decoded_as>json</decoded_as>
+
+    <field name="m04.scenario">^M04$</field>
+
+    <field name="m04.unique_files" type="pcre2">^(?:[5-9]|[1-9][0-9]+)$</field>
+
+    <description>THESIS M04: Mass DELETE access detected. User $(m04.username) targeted $(m04.unique_files) distinct files within 5 minutes.</description>
+
+    <group>thesis_m04,mass_file_deletion,</group>
+  </rule>
+
+</group>

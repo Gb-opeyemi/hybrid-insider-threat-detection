@@ -1,0 +1,12 @@
+{
+  "root": "/ABSOLUTE/PATH/TO/REPOSITORY",
+  "feed_dir": "/Volumes/CONTROLLED_COMPLETION_SHARE/completions",
+  "feed_id": "REPLACE_WITH_NEW_FEED_UUID",
+  "state_dir": "/ABSOLUTE/PATH/TO/REPOSITORY/data/experiments/operational_service/default",
+  "dry_run": true,
+  "enable_publication": false,
+  "ssh_host": "thesis-ml-manager",
+  "host_aliases": {"WINDOWS-SOURCE-HOST": ["WINDOWS-SOURCE-HOST.example.invalid"]},
+  "max_attempts": 3,
+  "retry_seconds": 60
+}

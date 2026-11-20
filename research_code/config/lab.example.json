@@ -1,0 +1,9 @@
+{
+  "account_domains": [
+    "EXAMPLE",
+    "EXAMPLE.LOCAL"
+  ],
+  "monitored_computer_prefix": "LAB-SERVER",
+  "monitored_file_root": "C:\\UniversityData",
+  "m05_destination": "m05receiver@198.51.100.20"
+}

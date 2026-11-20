@@ -1,0 +1,14 @@
+{
+  "root": "/ABSOLUTE/PATH/TO/REPOSITORY",
+  "completion_source": "wazuh",
+  "completion_agent_id": "REPLACE_WITH_WINDOWS_AGENT_ID",
+  "completion_location": "C:\\ProgramData\\ThesisHybrid\\session_lifecycle.jsonl",
+  "feed_id": "REPLACE_WITH_NEW_FEED_UUID",
+  "state_dir": "/ABSOLUTE/PATH/TO/REPOSITORY/data/experiments/operational_service/wazuh_default",
+  "dry_run": true,
+  "enable_publication": false,
+  "ssh_host": "thesis-ml-manager",
+  "host_aliases": {"WINDOWS-SOURCE-HOST": ["WINDOWS-TELEMETRY-HOST.example.invalid"]},
+  "max_attempts": 3,
+  "retry_seconds": 60
+}

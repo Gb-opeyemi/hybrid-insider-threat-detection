@@ -1,0 +1,5 @@
+<!-- Add INSIDE the manager's existing <ossec_config>; do not replace it. -->
+<localfile>
+  <log_format>json</log_format>
+  <location>/var/log/thesis-ml/predictions.jsonl</location>
+</localfile>

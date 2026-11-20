@@ -1,0 +1,9 @@
+[Unit]
+Description=Thesis M04 Near-Real-Time Mass Deletion Detector
+After=network-online.target wazuh-indexer.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/bin/flock -n /run/thesis-m04.lock /usr/bin/python3 /usr/local/bin/thesis_m04_counter_realtime.py
